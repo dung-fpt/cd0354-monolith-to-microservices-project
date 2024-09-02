@@ -6,11 +6,14 @@ jobs:
       - image: dungudacity/udagram-api-user:latest
     steps:
       - checkout
+      - run: docker build -t udagram-api-user ./udagram-api-user
+      - run: docker tag udagram-api-user dungudacity/udagram-api-user:latest
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - run: docker push dungudacity/udagram-api-user:latest
 
 workflows:
+  version: 2
   udagram-api-user-workflow:
     jobs:
       - udagram-api-user
