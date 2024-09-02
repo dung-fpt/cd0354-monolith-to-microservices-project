@@ -18,13 +18,18 @@ jobs:
             docker tag udagram-api-user $DOCKER_USERNAME/udagram-api-user:$TAG
             echo "start building api feed"
             docker tag udagram-api-feed $DOCKER_USERNAME/udagram-api-feed:$TAG
+            docker tag udagram-frontend $DOCKER_USERNAME/udagram-frontend:$TAG
+            docker tag reverseproxy $DOCKER_USERNAME/reverseproxy:$TAG
       - run:
+          name: Push application docker images
           command: | 
             docker --version
             TAG=1.0.$TAG_NUMBER
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
             docker push $DOCKER_USERNAME/udagram-api-user:$TAG
             docker push $DOCKER_USERNAME/udagram-api-feed:$TAG
+            docker push $DOCKER_USERNAME/udagram-frontend:$TAG
+            docker push $DOCKER_USERNAME/reverseproxy:$TAG
 
 workflows:
   version: 2
