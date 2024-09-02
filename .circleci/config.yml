@@ -4,13 +4,10 @@ jobs:
   udagram-api-user:
     docker:
       - image: docker:17.05.0-ce-git
-        auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - run: docker build -t udagram-api-user ./udagram-api-user
-      - run: docker tag udagram-api-user dungudacity/udagram-api-user:latest
+      - run: docker tag udagram-api-user $DOCKER_USERNAME/udagram-api-user:latest
       - run:
           command: | 
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
