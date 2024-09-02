@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - 16
+
+services:
+  - docker
+
+install:
+  - echo "nothing needs to be installed"
+
+before_script:
+  - echo "no tests"
+
+script:
+  - docker --version
+  - docker build -t udagram-api-user .
+  - docker tag udagram-api-user dungudacity/udagram-api-user:latest
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push dungudacity/udagram-api-user
