@@ -3,11 +3,11 @@ version: 2.1
 jobs:
   udagram-api-user:
     docker:
-      - image: cim/base:current
+      - image: cim/base:2024.09
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.14
+          version: 25.0.3
       - run: docker build -t udagram-api-user ./udagram-api-user
       - run: docker tag udagram-api-user $DOCKER_USERNAME/udagram-api-user:latest
       - run:
