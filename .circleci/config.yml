@@ -3,14 +3,18 @@ version: 2.1
 jobs:
   udagram-api-user:
     docker:
-      - image: dungudacity/udagram-api-user:latest
+      - image: cimg/base:2022.09
+        auth:
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       - run: docker build -t udagram-api-user ./udagram-api-user
       - run: docker tag udagram-api-user dungudacity/udagram-api-user:latest
       - run:
-          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - run: docker push dungudacity/udagram-api-user:latest
+          command: | 
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            docker push $DOCKER_USERNAME/udagram-api-user:latest
 
 workflows:
   version: 2
