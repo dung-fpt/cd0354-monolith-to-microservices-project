@@ -3,14 +3,17 @@ version: 2.1
 jobs:
   udagram-api-user:
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: cim/base:current
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.14
       - run: docker build -t udagram-api-user ./udagram-api-user
       - run: docker tag udagram-api-user $DOCKER_USERNAME/udagram-api-user:latest
       - run:
           command: | 
-            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            docker --version
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
             docker push $DOCKER_USERNAME/udagram-api-user:latest
 
 workflows:
