@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   udagram-api-user:
     docker:
-      - image: cim/base:2024.09
+      - image: cimg/base:2024.09
     steps:
       - checkout
       - setup_remote_docker:
