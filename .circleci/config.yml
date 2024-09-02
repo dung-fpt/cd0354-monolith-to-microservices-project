@@ -14,8 +14,10 @@ jobs:
       - run:
           command: |
             TAG=1.0.$TAG_NUMBER
+            echo "start building api user"
             docker tag udagram-api-user $DOCKER_USERNAME/udagram-api-user:$TAG
-            ocker tag udagram-api-feed $DOCKER_USERNAME/udagram-api-feed:$TAG
+            echo "start building api feed"
+            docker tag udagram-api-feed $DOCKER_USERNAME/udagram-api-feed:$TAG
       - run:
           command: | 
             docker --version
