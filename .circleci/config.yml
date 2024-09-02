@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   udagram-api-user:
     docker:
-      - image: cimg/base:2022.09
+      - image: docker:17.05.0-ce-git
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
