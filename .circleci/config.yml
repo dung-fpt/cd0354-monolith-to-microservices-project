@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+  udagram-api-user:
+    docker:
+      - image: dungudacity/udagram-api-user:latest
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
+
+workflows:
+  udagram-api-user-workflow:
+    jobs:
+      - udagram-api-user
+
+
+
+
